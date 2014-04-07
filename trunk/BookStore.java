@@ -1,3 +1,17 @@
+/*
+||========================================================
+|| CS680: Intro to Software Engineering
+|| EECS Dept, Wichita State University
+|| Spring, 2014
+||
+|| Student: Chinh D. Trang
+|| WSU ID: C824N474
+|| Programming Project
+|| Date: 04/01/2014
+||========================================================
+*/
+
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
