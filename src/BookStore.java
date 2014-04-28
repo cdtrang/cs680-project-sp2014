@@ -133,24 +133,28 @@ class BookStore extends Frame implements ActionListener, ItemListener{
 				cbBookName.add("How to use the MacIntosh Computer");
 				cbBookName.add("Computer - friend or enemy");
 				cbBookName.add("Phylosophy of the Computer");
+				cbBookName.add("Structured Computer Organization");
 				break;
 			}
 			case 1:{
 				cbBookName.add("Logic programming with C");
 				cbBookName.add("HTML, DHTML and Javascript");
 				cbBookName.add("Implementing SQL Server 2000");
+				cbBookName.add("Learning Python");
 				break;
 			}
 			case 2:{
 				cbBookName.add("Gone with the wind");
 				cbBookName.add("Murder on the Orient Express");
 				cbBookName.add("Harry Potter and the Chamber of Secrets");
+				cbBookName.add("A Passage to India" );
 				break;
 			}
 			case 3:{
 				cbBookName.add("Ancient Civilization");
 				cbBookName.add("The Shape of the Past");
 				cbBookName.add("The Lessons of History");
+				cbBookName.add("Wheels of Change");
 				break;
 			}
 		}
