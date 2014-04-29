@@ -160,6 +160,7 @@ class BookStore extends Frame implements ActionListener, ItemListener{
 				cbBookName.add("Murder on the Orient Express");
 				cbBookName.add("Harry Potter and the Chamber of Secrets");
 				cbBookName.add("A Passage to India" );
+				cbBookName.add("Test" );
 				break;
 			}
 			case 3:{
@@ -248,22 +249,36 @@ class BookStore extends Frame implements ActionListener, ItemListener{
 	
 	public void save(){
 		String s="";
-		s = txtInvoiceDate.getText();
-		s = s + "; " + txtCustomerFName.getText().trim();
-		s = s + "; " + txtCustomerLName.getText().trim();
-		s = s + "; " + cbBookCat.getSelectedItem();
-		s = s + "; " + cbBookName.getSelectedItem();
-		s = s + "; " + txtUnitPrice.getText();
-		s = s + "; " + txtQuantity.getText();
-		s = s + "; " + txtAmount.getText();
+		s = txtInvoiceID.getText();
+		s = s + ", " + txtInvoiceDate.getText();
+		s = s + ", " + txtCustomerFName.getText().trim();
+		s = s + ", " + txtCustomerLName.getText().trim();
+		s = s + ", " + cbBookCat.getSelectedItem();
+		s = s + ", " + cbBookName.getSelectedItem();
+		s = s + ", " + txtUnitPrice.getText();
+		s = s + ", " + txtQuantity.getText();
+		s = s + ", " + txtAmount.getText();
 		try {
-			PrintStream ps = new PrintStream(new FileOutputStream("BookShop.xlsx",true));
-			ps.println(s);
-			ps.close();
-	  }
-	  catch (IOException ex) {
-	  	System.out.println ("File Writing Error!");
-	  }
+			Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+            Connection con = DriverManager.getConnection("jdbc:odbc:BookShop");
+            Statement st = con.createStatement();
+            st.executeUpdate("INSERT INTO BookShop(invoice_id, invoice_date, first_name, last_name, book_catalog, book_title, unit_price, quantity, amount) VALUES (" + s +")");
+			
+//			PrintStream ps = new PrintStream(new FileOutputStream("BookShop.xlsx",true));
+//			ps.println(s);
+//			ps.close();
+		}
+//		catch (IOException ex) {
+//	  	System.out.println ("File Writing Error!");
+//		} 
+		catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void reset(){
@@ -284,7 +299,7 @@ class BookStore extends Frame implements ActionListener, ItemListener{
 	public void view(){
 		try {
 			Runtime r = Runtime.getRuntime();
-			Process p = r.exec("Excel.exe BookShop.xlsx");
+			Process p = r.exec("Excel.exe BookShop.xls");
 	  }
 	  catch (IOException ex) {
 	  	System.out.println ("File Reading Error!");
