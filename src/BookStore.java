@@ -21,7 +21,7 @@ import java.util.Date;
 import java.text.*;
 import java.sql.*;
 
-class BookStore extends Frame implements ActionListener, ItemListener{
+class BookStore extends Frame implements ActionListener, ItemListener {
 	Choice cbBookCat, cbBookName;
 	TextField txtInvoiceID, txtInvoiceDate, txtCustomerFName, txtCustomerLName, txtUnitPrice, txtQuantity, txtAmount;
 	Button bSave, bCancel,bView;
@@ -53,7 +53,12 @@ class BookStore extends Frame implements ActionListener, ItemListener{
 		
 		addComp(p2,new Label("Invoice ID :"),0,0,1,1);
 		txtInvoiceID = new TextField(40);
-		//txtInvoiceID.setEditable(false);
+		txtInvoiceID.setText("0");
+		String str = txtInvoiceID.getText();
+		int num = Integer.valueOf(str);
+		str = Integer.toString(++num);
+		txtInvoiceID.setText(str);
+		
 		addComp(p2,txtInvoiceID,0,1,1,1);
 
 		addComp(p2,new Label("Invoice Date :"),1,0,1,1);
@@ -113,20 +118,19 @@ class BookStore extends Frame implements ActionListener, ItemListener{
 		p3.add(bView); bView.addActionListener(this);
 		
 		addWindowListener(new WindowAdapter(){
-			public void windowClosing(WindowEvent we){
+			public void windowClosing(WindowEvent we) {
 				System.exit(0);
 			}
-			});
-			
-			
-		setSize(500,400);
+		});
+						
+		setSize(600,400);
 		setVisible(true);
 		txtCustomerFName.requestFocus();
 		txtCustomerLName.requestFocus();
 		
 	}
 	
-	public void addComp(Panel p, Component com, int row, int col, int rows, int cols){
+	public void addComp(Panel p, Component com, int row, int col, int rows, int cols) {
 		gbc.gridx = col;
 		gbc.gridy = row;
 		gbc.gridwidth = cols;
@@ -136,7 +140,7 @@ class BookStore extends Frame implements ActionListener, ItemListener{
 		p.add(com);
 	}
 	
-	public void itemStateChanged(ItemEvent ie){
+	public void itemStateChanged(ItemEvent ie) {
 		int i = cbBookCat.getSelectedIndex();
 		cbBookName.removeAll();
 		
@@ -160,7 +164,6 @@ class BookStore extends Frame implements ActionListener, ItemListener{
 				cbBookName.add("Murder on the Orient Express");
 				cbBookName.add("Harry Potter and the Chamber of Secrets");
 				cbBookName.add("A Passage to India" );
-				cbBookName.add("Test" );
 				break;
 			}
 			case 3:{
@@ -172,34 +175,34 @@ class BookStore extends Frame implements ActionListener, ItemListener{
 			}
 		}
 	}
-	
-	public void actionPerformed(ActionEvent ae){
-		if(ae.getSource()==bSave){
+	 
+	public void actionPerformed(ActionEvent ae) {
+		if(ae.getSource()==bSave) {
 			if(validation()) save();
 		}
-		else if(ae.getSource()==bCancel){
+		else if(ae.getSource()==bCancel) {
 			reset();
 		}
-		else if(ae.getSource()==bView){
+		else if(ae.getSource()==bView) {
 			view();
 		}
 	}
 	
-	public boolean validation(){
+	public boolean validation() {
 		
-		if(txtCustomerFName.getText().trim().length()==0){
+		if(txtCustomerFName.getText().trim().length()==0) {
 			javax.swing.JOptionPane.showMessageDialog(null,"Customer's first name could not be blank!");
 			txtCustomerFName.requestFocus();
 			return false;
 		}
 		
-		if(txtCustomerLName.getText().trim().length()==0){
+		if(txtCustomerLName.getText().trim().length()==0) {
 			javax.swing.JOptionPane.showMessageDialog(null,"Customer's last name could not be blank!");
 			txtCustomerLName.requestFocus();
 			return false;
 		}
 		
-		if(cbBookName.getSelectedIndex()==-1){
+		if(cbBookName.getSelectedIndex()==-1) {
 			javax.swing.JOptionPane.showMessageDialog(null,"Book title could not be blank!");
 			cbBookCat.requestFocus();
 			return false;
@@ -209,7 +212,7 @@ class BookStore extends Frame implements ActionListener, ItemListener{
 		float price, quantity;
 		price = quantity =0;
 		
-		if(txtUnitPrice.getText().trim().length()==0){
+		if(txtUnitPrice.getText().trim().length()==0) {
 			javax.swing.JOptionPane.showMessageDialog(null,"Unit price could not be blank!");
 			txtUnitPrice.requestFocus();
 			return false;
@@ -226,7 +229,7 @@ class BookStore extends Frame implements ActionListener, ItemListener{
 		  }
 		}
 		
-		if(txtQuantity.getText().trim().length()==0){
+		if(txtQuantity.getText().trim().length()==0) {
 			javax.swing.JOptionPane.showMessageDialog(null,"Quantity could not be blank!");
 			txtQuantity.requestFocus();
 			return false;
@@ -247,41 +250,47 @@ class BookStore extends Frame implements ActionListener, ItemListener{
 		return true;
 	}	
 	
-	public void save(){
+	public void save() {
 		String s="";
 		s = txtInvoiceID.getText();
-		s = s + ", " + txtInvoiceDate.getText();
-		s = s + ", " + txtCustomerFName.getText().trim();
-		s = s + ", " + txtCustomerLName.getText().trim();
-		s = s + ", " + cbBookCat.getSelectedItem();
-		s = s + ", " + cbBookName.getSelectedItem();
-		s = s + ", " + txtUnitPrice.getText();
-		s = s + ", " + txtQuantity.getText();
-		s = s + ", " + txtAmount.getText();
+		s = s + "," + txtInvoiceDate.getText();
+		s = s + "," + txtCustomerFName.getText().trim();
+		s = s + "," + txtCustomerLName.getText().trim();
+		s = s + "," + cbBookCat.getSelectedItem();
+		s = s + "," + cbBookName.getSelectedItem();
+		s = s + "," + txtUnitPrice.getText();
+		s = s + "," + txtQuantity.getText();
+		s = s + "," + txtAmount.getText();
+		
+		String str = txtInvoiceID.getText();
+		int num = Integer.valueOf(str);
+		str = Integer.toString(++num);
+		txtInvoiceID.setText(str);
+		
 		try {
-			Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-            Connection con = DriverManager.getConnection("jdbc:odbc:BookShop");
-            Statement st = con.createStatement();
-            st.executeUpdate("INSERT INTO BookShop(invoice_id, invoice_date, first_name, last_name, book_catalog, book_title, unit_price, quantity, amount) VALUES (" + s +")");
+//			Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+//          Connection con = DriverManager.getConnection("jdbc:odbc:BookShop");
+//          Statement st = con.createStatement();
+//          st.executeUpdate("INSERT INTO BookShop(invoice_id, invoice_date, first_name, last_name, book_catalog, book_title, unit_price, quantity, amount) VALUES (" + s +")");
+//          st.executeUpdate("INSERT INTO [bookshop$] VALUES (" + s +")");
+//			con.close();
 			
-//			PrintStream ps = new PrintStream(new FileOutputStream("BookShop.xlsx",true));
-//			ps.println(s);
-//			ps.close();
+			PrintStream ps = new PrintStream(new FileOutputStream("BookShop.txt",true));
+			ps.println(s);
+			ps.close();
 		}
-//		catch (IOException ex) {
-//	  	System.out.println ("File Writing Error!");
-//		} 
-		catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		catch (IOException ex) {
+	  	System.out.println ("File Writing Error!");
 		} 
-		catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		} 
+//		catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
-	public void reset(){
+	public void reset() {
 		txtCustomerFName.setText(""); 
 		txtCustomerFName.requestFocus();
 		
@@ -296,20 +305,20 @@ class BookStore extends Frame implements ActionListener, ItemListener{
 		txtAmount.setText("");
 	}
 	
-	public void view(){
+	public void view() {
 		try {
 			Runtime r = Runtime.getRuntime();
-			Process p = r.exec("Excel.exe BookShop.xls");
+			Process p = r.exec("notepad.exe BookShop.txt");
 	  }
 	  catch (IOException ex) {
 	  	System.out.println ("File Reading Error!");
 	  }
-	  catch(Exception ex){
+	  catch(Exception ex) {
 	  	System.out.println ("Runtime Error!");
 	  }
 	}
 	
-	public static void main(String [] s){
+	public static void main(String [] s) {
 		new BookStore("Book Store System");	
 	}
 }
