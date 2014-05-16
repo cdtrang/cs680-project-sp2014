@@ -1,0 +1,6 @@
+700,05/15/2014,Chinh,Trang,Novel,Gone with the wind,52,2,104.0
+701,05/15/2014,Thao,Ha,Programming,Implementing SQL Server 2000,71,1,71.0
+1,05/15/2014,Chinh,Trang,Programming,Logic programming with C,50,2,100.0
+1,05/15/2014,Thao,Ha,Novel,Gone with the wind,53,1,53.0
+1,05/15/2014,Chinh,trang,Programming,Logic programming with C,25,2,50.0
+2,05/15/2014,Thao,Ha,Programming,Logic programming with C,25,2,50.0
