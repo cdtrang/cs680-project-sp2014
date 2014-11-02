@@ -269,12 +269,11 @@ class BookStore extends Frame implements ActionListener, ItemListener {
 		
 		try {
 /*			Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-//          Connection con = DriverManager.getConnection("jdbc:odbc:BookShop");
-//          Statement st = con.createStatement();
-//          st.executeUpdate("INSERT INTO BookShop(invoice_id, invoice_date, first_name, last_name, book_catalog, book_title, unit_price, quantity, amount) VALUES (" + s +")");
-//          st.executeUpdate("INSERT INTO [bookshop$] VALUES (" + s +")");
-//			con.close();
- * 
+          	Connection con = DriverManager.getConnection("jdbc:odbc:BookShop");
+         	Statement st = con.createStatement();
+         	st.executeUpdate("INSERT INTO BookShop(invoice_id, invoice_date, first_name, last_name, book_catalog, book_title, unit_price, quantity, amount) VALUES (" + s +")");
+          	st.executeUpdate("INSERT INTO [bookshop$] VALUES (" + s +")");
+			con.close();
  */
 			
 			PrintStream ps = new PrintStream(new FileOutputStream("BookShop.txt",true));
