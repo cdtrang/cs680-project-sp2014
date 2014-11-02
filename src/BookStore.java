@@ -282,12 +282,6 @@ class BookStore extends Frame implements ActionListener, ItemListener {
 		catch (IOException ex) {
 	  	System.out.println ("File Writing Error!");
 		} 
-//		catch (ClassNotFoundException e) {
-//			e.printStackTrace();
-//		} 
-//		catch (SQLException e) {
-//			e.printStackTrace();
-//		}
 	}
 	
 	public void reset() {
